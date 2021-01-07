@@ -10,11 +10,7 @@ import Container from "react-bootstrap/Container";
 const APIKEY = "4175977b";
 const APIURL = "http://www.omdbapi.com";
 
-function fetchMovies(search) {
-  return fetch(APIURL + "?apikey=" + APIKEY + "&t=" + search).then((res) =>
-    res.json()
-  );
-}
+
 
 class App extends Component {
   constructor(props) {
@@ -33,29 +29,65 @@ class App extends Component {
       ],
       movies: [],
       totalCount: 0,
+      flag: 0,
+      searchFilm: ''
     };
+    this.fetchMovies = this.fetchMovies.bind(this)
   }
+
+
+  fetchMovies(search, number) {
+    console.log('test -----> ' + search + ' entro')
+    this.setState({
+      flag: number,
+      searchFilm: search
+    })
+    if(this.state.flag === 0){
+      return fetch(APIURL + "?apikey=" + APIKEY + "&t=" + search).then((res) =>
+        res.json()
+      );
+    }else{
+      return fetch(APIURL + "?apikey=" + APIKEY + "&s=" + search).then((res) =>
+      res.json()
+      );
+    }
+  }
+
 
   componentDidMount() {
-    this.getCasualFilm();
+    this.getFilm();
   }
 
-  getCasualFilm() {
+  componentDidUpdate() {
+    if (this.state.flag === 1) {
+      this.getFilm();
+    }
+  }
+
+  getFilm() {
     this.movie = [];
-    for (let i = 0; i < this.state.default_title.length; i++) {
-      fetchMovies(this.state.default_title[i]).then((res) => {
-        this.movie.push(res);
-        this.setState({
-          movies: this.movie,
+    if (this.state.flag === 0) {
+      for (let i = 0; i < this.state.default_title.length; i++) {
+        this.fetchMovies(this.state.default_title[i]).then((res) => {
+          this.movie.push(res);
+          this.setState({
+            movies: this.movie,
+          });
         });
-      });
+      }
+    } else {
+        this.fetchMovies(this.state.searchFilm).then((res) => {
+          this.setState({
+            movies: res.Search,
+          });
+        });
     }
   }
 
   render() {
     return (
       <React.Fragment>
-        <NavBar></NavBar>
+        <NavBar cercaFilm={this.fetchMovies}></NavBar>
         <header className="App-header">
           <br></br>
           <Container>

@@ -5,8 +5,15 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
+
 class CardCustom extends Component {
+
   render() {
+
+    const mystyle = {
+      height: '148px'
+    };
+
     const popover = (
       <Popover id="popover-basic">
         <Popover.Title as="h3">
@@ -45,7 +52,7 @@ class CardCustom extends Component {
             src={this.props.img}
             style={{ height: "300px" }}
           />
-          <Card.Body>
+          <Card.Body style={mystyle}>
             <h5>
               <Card.Text>{this.props.title}</Card.Text>
             </h5>
