@@ -5,25 +5,24 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 class NavBar extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.search = this.search.bind(this);
     this.state = {
-      ricerca: ''
-    }
+      ricerca: "",
+    };
   }
 
-handleChange(event){
-  this.setState({
-    ricerca: event.target.value
-  })
-}
+  handleChange(event) {
+    this.setState({
+      ricerca: event.target.value,
+    });
+  }
 
-search(){
-  this.props.cercaFilm(this.state.ricerca, 1)
-}
+  search() {
+    this.props.cercaFilm(this.state.ricerca, 1);
+  }
 
   render() {
     return (
@@ -36,10 +35,12 @@ search(){
               type="text"
               placeholder="Search"
               className="mr-sm-2"
-              value = {this.state.ricerca}
+              value={this.state.ricerca}
               onChange={this.handleChange}
             />
-            <Button variant="outline-success" onClick={this.search}>Search</Button>
+            <Button variant="outline-success" onClick={this.search}>
+              Search
+            </Button>
           </Form>
         </Navbar>
       </React.Fragment>

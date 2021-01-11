@@ -10,8 +10,6 @@ import Container from "react-bootstrap/Container";
 const APIKEY = "4175977b";
 const APIURL = "http://www.omdbapi.com";
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,29 +28,27 @@ class App extends Component {
       movies: [],
       totalCount: 0,
       flag: 0,
-      searchFilm: ''
+      searchFilm: "",
     };
-    this.fetchMovies = this.fetchMovies.bind(this)
+    this.fetchMovies = this.fetchMovies.bind(this);
   }
 
-
   fetchMovies(search, number) {
-    console.log('test -----> ' + search + ' entro')
+    console.log("test -----> " + search + " entro");
     this.setState({
       flag: number,
-      searchFilm: search
-    })
-    if(this.state.flag === 0){
+      searchFilm: search,
+    });
+    if (this.state.flag === 0) {
       return fetch(APIURL + "?apikey=" + APIKEY + "&t=" + search).then((res) =>
         res.json()
       );
-    }else{
+    } else {
       return fetch(APIURL + "?apikey=" + APIKEY + "&s=" + search).then((res) =>
-      res.json()
+        res.json()
       );
     }
   }
-
 
   componentDidMount() {
     this.getFilm();
@@ -76,11 +72,11 @@ class App extends Component {
         });
       }
     } else {
-        this.fetchMovies(this.state.searchFilm).then((res) => {
-          this.setState({
-            movies: res.Search,
-          });
+      this.fetchMovies(this.state.searchFilm).then((res) => {
+        this.setState({
+          movies: res.Search,
         });
+      });
     }
   }
 
@@ -93,16 +89,8 @@ class App extends Component {
           <Container>
             <Row>
               {this.state.movies.map((movie) => (
-                <Col>
-                  <CardCustom
-                    img={movie.Poster}
-                    title={movie.Title}
-                    anno={movie.Released}
-                    attori={movie.Actors}
-                    awards={movie.Awards}
-                    genere={movie.Genre}
-                    trama={movie.Plot}
-                  />
+                <Col key={movie.Title}>
+                  <CardCustom img={movie.Poster} title={movie.Title} />
                   <br></br>
                 </Col>
               ))}
@@ -115,11 +103,3 @@ class App extends Component {
 }
 
 export default App;
-
-/* {
-     this.state.movies.map((movie) => (
-       <li key={movie.imdbID}>
-         <img src={movie.Poster} class="img-thumbnail" alt="..." />
-       </li>
-     ))
-   }*/
