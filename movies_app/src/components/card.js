@@ -6,7 +6,7 @@ import Dialog from "../components/dialog.js";
 class CardCustom extends Component {
   render() {
     const mystyle = {
-      height: "148px",
+      height: "155px",
     };
     return (
       <React.Fragment>
@@ -20,7 +20,9 @@ class CardCustom extends Component {
             <h5>
               <Card.Text>{this.props.title}</Card.Text>
             </h5>
-            <Dialog titolo={this.props.title} />
+            
+            <Dialog titolo={this.props.title}/>
+            
           </Card.Body>
         </Card>
       </React.Fragment>

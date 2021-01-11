@@ -34,9 +34,9 @@ const Dialog = (props) => {
 
   return (
     <>
-      <br />
 
-      <Button variant="primary" onClick={() => searchByTitle(props.titolo)}>
+
+      <Button variant="primary" onClick={() => searchByTitle(props.titolo)} style={{position: 'absolute', bottom: '8px', left: '15px'}}>
         Informazioni
       </Button>
 

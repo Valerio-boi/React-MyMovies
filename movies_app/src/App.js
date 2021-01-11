@@ -88,12 +88,19 @@ class App extends Component {
           <br></br>
           <Container>
             <Row>
-              {this.state.movies.map((movie) => (
-                <Col key={movie.Title}>
-                  <CardCustom img={movie.Poster} title={movie.Title} />
-                  <br></br>
-                </Col>
-              ))}
+              {
+                this.state.movies.map((movie) => {
+
+                  if (movie.Poster !== 'N/A') {
+                    return (
+                      <Col key={movie.imdbID}>
+                        <CardCustom img={movie.Poster} title={movie.Title} />
+                        <br></br>
+                      </Col>
+                    )
+                  }
+                })
+              }
             </Row>
           </Container>
         </header>
